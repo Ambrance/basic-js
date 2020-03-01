@@ -1,5 +1,5 @@
 module.exports = function repeater(str, options) {
-    let res = str;
+    let res = '';
     if (options) {
         const times = options.repeatTimes || 1;
         let addition = options.addition || '';
@@ -10,10 +10,13 @@ module.exports = function repeater(str, options) {
         if (additionRepeat > 1) {
             additionPattern = additionSeparator + addition;
         }
-        const pattern = str + additionPattern.repeat(additionRepeat);
-        res += addition + additionPattern.repeat(additionRepeat - 1);
-        for (let i = 1; i < times; i++) {
-            res += separator + pattern;
+        const pattern = str + addition + additionPattern.repeat(additionRepeat - 1);
+        //res += additionPattern.repeat(additionRepeat);
+        for (let i = 1; i <= times; i++) {
+            res += pattern;
+            if (i < times) {
+                res += separator;
+            }
         }
     }
     return res;
