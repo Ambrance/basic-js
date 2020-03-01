@@ -2,7 +2,7 @@ module.exports = function repeater(str, options) {
     let res = '';
     if (options) {
         const times = options.repeatTimes || 1;
-        let addition = options.addition || '';
+        let addition = typeof options.addition === 'boolean' || options.addition === null ? String(options.addition) : options.addition || '';
         const separator = options.separator || '+';
         const additionRepeat = options.additionRepeatTimes || 1;
         const additionSeparator = options.additionSeparator || '|';
@@ -11,7 +11,6 @@ module.exports = function repeater(str, options) {
             additionPattern = additionSeparator + addition;
         }
         const pattern = str + addition + additionPattern.repeat(additionRepeat - 1);
-        //res += additionPattern.repeat(additionRepeat);
         for (let i = 1; i <= times; i++) {
             res += pattern;
             if (i < times) {
